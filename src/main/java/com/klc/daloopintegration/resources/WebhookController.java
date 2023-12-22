@@ -24,34 +24,20 @@ public class WebhookController {
 
         if(authorization.equals("")){
 
-            switch (hookTemplate.getEvent()){
-
-
-                case "started":
+            return switch (hookTemplate.getEvent()) {
+                case "started", "costCalculated", "ended" ->
 
                     //Get season data
-                    break;
+                        ResponseEntity.status(200).body(Collections.singletonMap("body", "ok"));
+                default -> ResponseEntity.status(400).body(Collections.singletonMap("result", "event unknown"));
+            };
 
 
-                case "ended":
-
-                    //GetData
-                    break;
-
-                case "costCalculated":
-
-
-                    //Get Data
-                    break;
-
-                default:
-                    return ResponseEntity.status(400).body(Collections.singletonMap("result","event unknown"));
-            }
-
-
+        }else{
+            return ResponseEntity.status(403).body(Collections.singletonMap("result","invalid token"));
         }
 
 
-    return ResponseEntity.status(200).body(Collections.singletonMap("body","ok"));
+
     }
 }
