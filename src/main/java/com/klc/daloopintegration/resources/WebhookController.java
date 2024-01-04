@@ -22,7 +22,9 @@ public class WebhookController {
     public ResponseEntity<?> hookHandling(@RequestHeader("Authorization") String authorization,@RequestHeader("API_KEY") String apiKey, @RequestBody HookData hookTemplate){
         log.info(hookTemplate.toString());
 
-        if(authorization.equals("")){
+        if(apiKey!=null){
+
+            log.info(apiKey);
 
             return switch (hookTemplate.getEvent()) {
                 case "started", "costCalculated", "ended" ->
