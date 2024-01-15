@@ -19,7 +19,7 @@ public class WebhookController {
 
 
     @PostMapping("/api/webhook")
-    public ResponseEntity<?> hookHandling(@RequestHeader("Authorization") String authorization,@RequestHeader("API_KEY") String apiKey, @RequestBody HookData hookTemplate){
+    public ResponseEntity<?> hookHandling(@RequestHeader("API_KEY") String apiKey, @RequestBody HookData hookTemplate){
         log.info(hookTemplate.toString());
 
         if(apiKey!=null){
