@@ -33,7 +33,7 @@ public class WebhookController {
             log.info(apiKey);
             return switch (hookTemplate.getEvent()) {
                 case "started", "costCalculated", "ended" -> {
-                    String res = this.daloopRestService.getTransactionsDetails();
+                    String res = this.daloopRestService.getTransactionsDetails(hookTemplate.getData().getUsageId());
                     log.info(res);
                     yield ResponseEntity.status(200).body(Collections.singletonMap("body", "ok"));
                 } default -> ResponseEntity.status(400).body(Collections.singletonMap("result", "event unknown"));
