@@ -1,6 +1,7 @@
 package com.klc.daloopintegration.services;
 
 
+import com.klc.daloopintegration.data.HookData;
 import com.klc.daloopintegration.dto.AuthResponseDTO;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,13 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
     private String getToken(){
 
-        String formData = "grant_type=client_credentials&client_id=API_GATEWAY_MCP&client_secret=6b8fed4e-7021-4f0b-89e4-d3fe94378d5a&scope=openid";
+        String formData = "grant_type=client_credentials&client_id=KLC_MIDDLEWARE_CLIENT&client_secret=6a7df6f5-7412-4dc9-af51-ee2dc02c6c4b&scope=openid";
 
 
         WebClient webClient = WebClient.create();
 
         Mono<AuthResponseDTO> result  = webClient.post()
-                .uri(BASE_PATH_AUTH+"/auth/realms/LIDL_PT/protocol/openid-connect/token")
+                .uri(BASE_PATH_AUTH+"/auth/realms/KLC/protocol/openid-connect/token")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .body(BodyInserters.fromValue(formData))
                 .retrieve()
@@ -50,5 +51,10 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
 
         return responseMono.block();
+    }
+
+    @Override
+    public void registerConnectivityEvent(HookData hookTemplate) {
+
     }
 }

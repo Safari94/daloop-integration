@@ -10,4 +10,10 @@ import lombok.*;
 public class Data {
 
     private String usageId;
+
+    private String  connectivity;
+
+    private String chargingStationId;
+
+
 }

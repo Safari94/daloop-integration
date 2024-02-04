@@ -36,7 +36,13 @@ public class WebhookController {
                     String res = this.daloopRestService.getTransactionsDetails(hookTemplate.getData().getUsageId());
                     log.info(res);
                     yield ResponseEntity.status(200).body(Collections.singletonMap("body", "ok"));
-                } default -> ResponseEntity.status(400).body(Collections.singletonMap("result", "event unknown"));
+                }
+                case "connectivity" -> {
+                         this.daloopRestService.registerConnectivityEvent(hookTemplate);
+                        yield ResponseEntity.status(200).body(Collections.singletonMap("body", "ok"));
+
+                    }
+               default -> ResponseEntity.status(400).body(Collections.singletonMap("result", "event unknown"));
             };
         }else{
             return ResponseEntity.status(403).body(Collections.singletonMap("result","invalid token"));
