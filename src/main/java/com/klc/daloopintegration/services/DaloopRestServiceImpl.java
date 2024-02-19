@@ -3,12 +3,16 @@ package com.klc.daloopintegration.services;
 
 import com.klc.daloopintegration.data.HookData;
 import com.klc.daloopintegration.dto.AuthResponseDTO;
+import com.klc.daloopintegration.entities.Hook;
+import com.klc.daloopintegration.repository.HookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +20,9 @@ import java.util.Map;
 public class DaloopRestServiceImpl implements DaloopRestService {
 
     private static final String BASE_PATH_AUTH="https://mobime.io";
+
+    @Autowired
+    private HookRepository hookRepository;
 
     private String getToken(){
 
@@ -55,6 +62,14 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
     @Override
     public void registerConnectivityEvent(HookData hookTemplate) {
+
+        Hook hook = new Hook();
+        hook.setEventType(hookTemplate.getEvent());
+        hook.setStationInfo(hookTemplate.getData().getChargingStationId());
+        hook.setConnectivity(hookTemplate.getData().getConnectivity());
+        hook.setCreatedDate(LocalDateTime.now());
+
+        this.hookRepository.save(hook);
 
     }
 }
