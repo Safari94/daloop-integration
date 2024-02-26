@@ -26,7 +26,7 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
     private String getToken(){
 
-        String formData = "grant_type=client_credentials&client_id=KLC_MIDDLEWARE_CLIENT&client_secret=6a7df6f5-7412-4dc9-af51-ee2dc02c6c4b&scope=openid";
+        String formData = "grant_type=client_credentials&client_id=KLC_MIDDLEWARE_CLIENT&client_secret=476faaea-5e27-4968-bb1c-d2ebf0c5d255&scope=openid";
 
 
         WebClient webClient = WebClient.create();
@@ -72,4 +72,5 @@ public class DaloopRestServiceImpl implements DaloopRestService {
         this.hookRepository.save(hook);
 
     }
+
 }
