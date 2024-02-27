@@ -50,8 +50,9 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
         WebClient webClient = WebClient.create();
         Mono<String> responseMono = webClient.get()
-                .uri(BASE_PATH_AUTH+"/analytics-smart/api/detail/charging-activity?filter=id=="+transactionId)
-                .header("Authentication","Bearer "+getToken())// Specify the endpoint
+                .uri(BASE_PATH_AUTH+"/mcp/api/detail/charging-activity?filter=id=="+transactionId)
+                .header("Authentication","Bearer "+getToken())
+                .header("BUSINESS_UNIT","KLC")// Specify the endpoint
                 .retrieve() // Retrieve the response body
                 .bodyToMono(String.class); // Convert the response body to a Mono<String>
 
