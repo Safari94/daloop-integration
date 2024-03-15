@@ -5,7 +5,7 @@ import com.klc.daloopintegration.dto.ChargingActivityDataDTO;
 
 public interface DaloopRestService {
 
-    ChargingActivityDataDTO getTransactionsDetails(String transactionId);
+    String getTransactionsDetails(String transactionId);
 
     void registerConnectivityEvent(HookData hookTemplate);
 }

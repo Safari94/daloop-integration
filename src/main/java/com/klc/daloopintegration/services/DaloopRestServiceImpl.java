@@ -49,7 +49,7 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
     }
 
-    public ChargingActivityDataDTO getTransactionsDetails(String transactionId){
+    public String getTransactionsDetails(String transactionId){
 
         RestClient restClient = RestClient.create();
 
@@ -69,12 +69,12 @@ public class DaloopRestServiceImpl implements DaloopRestService {
         return responseMono.block();
         */
 
-        ChargingActivityDataDTO response = restClient.get()
-                .uri("https://mobime.io/api/mcp/analytics/detail/charging-activity?filter=id=="+transactionId)
+        String response = restClient.get()
+                .uri("https://mobime.io//api/mcp/breakdown/usage/"+transactionId)
                 .header("Authorization","Bearer "+token)
                 .header("BUSINESS_UNIT","KLC")
                 .retrieve()
-                .body(ChargingActivityDataDTO.class);
+                .body(String.class);
 
         return response;
     }

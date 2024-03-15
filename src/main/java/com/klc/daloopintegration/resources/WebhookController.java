@@ -34,7 +34,7 @@ public class WebhookController {
             log.info(apiKey);
             return switch (hookTemplate.getEvent()) {
                 case "started", "costCalculated", "ended" -> {
-                    ChargingActivityDataDTO res = this.daloopRestService.getTransactionsDetails(hookTemplate.getData().getUsageId());
+                    String res = this.daloopRestService.getTransactionsDetails(hookTemplate.getData().getUsageId());
                     log.info(String.valueOf(res));
                     yield ResponseEntity.status(200).body(Collections.singletonMap("body", "ok"));
                 }
