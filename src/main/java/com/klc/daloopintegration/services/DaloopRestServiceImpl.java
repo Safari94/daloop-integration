@@ -5,7 +5,9 @@ import com.klc.daloopintegration.data.HookData;
 import com.klc.daloopintegration.dto.AuthResponseDTO;
 import com.klc.daloopintegration.dto.ChargingActivityDataDTO;
 import com.klc.daloopintegration.entities.Hook;
+import com.klc.daloopintegration.entities.SessionInfo;
 import com.klc.daloopintegration.repository.HookRepository;
+import com.klc.daloopintegration.repository.SessionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,6 +20,7 @@ import reactor.core.publisher.Mono;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -27,6 +30,8 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
     @Autowired
     private HookRepository hookRepository;
+
+    private SessionRepository sessionRepository;
 
     private String getToken(){
 
@@ -89,6 +94,20 @@ public class DaloopRestServiceImpl implements DaloopRestService {
         hook.setCreatedDate(LocalDateTime.now());
 
         this.hookRepository.save(hook);
+
+    }
+
+    public UUID storeStartTransaction(HookData hookTemplate){
+
+        SessionInfo si = new SessionInfo();
+        si.setTransactionId(hookTemplate.getData().getChargingStationId());
+        si.setEndTime(null);
+        si.setStartTime(LocalDateTime.now());
+
+        UUID savedId = this.sessionRepository.save(si).getId();
+
+
+        return savedId;
 
     }
 

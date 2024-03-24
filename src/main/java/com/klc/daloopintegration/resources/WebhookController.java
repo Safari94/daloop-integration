@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.UUID;
 
 @RestController
 @Slf4j
@@ -33,7 +34,14 @@ public class WebhookController {
 
             log.info(apiKey);
             return switch (hookTemplate.getEvent()) {
-                case "started", "costCalculated", "ended" -> {
+                case "started" -> {
+
+                    UUID saved=this.daloopRestService.storeStartTransaction(hookTemplate);
+                    log.info("Register new transaction -> {}",saved);
+                    yield ResponseEntity.status(200).body(Collections.singletonMap("body", "ok"));
+
+                }
+                case "costCalculated", "ended" -> {
                     String res = this.daloopRestService.getTransactionsDetails(hookTemplate.getData().getUsageId());
                     log.info(String.valueOf(res));
                     yield ResponseEntity.status(200).body(Collections.singletonMap("body", "ok"));
