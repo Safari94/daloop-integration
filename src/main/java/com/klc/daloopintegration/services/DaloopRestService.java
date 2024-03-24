@@ -12,4 +12,6 @@ public interface DaloopRestService {
     void registerConnectivityEvent(HookData hookTemplate);
 
    UUID storeStartTransaction(HookData hookTemplate);
+
+    void endTransaction(HookData hookTemplate);
 }

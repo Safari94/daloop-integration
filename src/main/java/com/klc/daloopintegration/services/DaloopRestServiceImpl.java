@@ -112,4 +112,14 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
     }
 
+    public void endTransaction(HookData hookTemplate){
+
+        SessionInfo s = this.sessionRepository.findByTransactionIdAndEndTimeIsNull(hookTemplate.getData().getChargingStationId());
+        if(s!=null){
+            s.setEndTime(LocalDateTime.now());
+            this.sessionRepository.save(s);
+        }
+
+    }
+
 }

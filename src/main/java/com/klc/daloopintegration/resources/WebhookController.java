@@ -38,17 +38,21 @@ public class WebhookController {
 
                     UUID saved=this.daloopRestService.storeStartTransaction(hookTemplate);
                     log.info("Register new transaction -> {}",saved);
-                    yield ResponseEntity.status(200).body(Collections.singletonMap("body", "ok"));
+                    yield ResponseEntity.status(200).body(Collections.singletonMap("result", "ok"));
 
                 }
-                case "costCalculated", "ended" -> {
+                case  "ended" -> {
+                    this.daloopRestService.endTransaction(hookTemplate);
+                    yield ResponseEntity.status(200).body(Collections.singletonMap("result", "ok"));
+                }
+                case "costCalculated" -> {
                     String res = this.daloopRestService.getTransactionsDetails(hookTemplate.getData().getUsageId());
                     log.info(String.valueOf(res));
-                    yield ResponseEntity.status(200).body(Collections.singletonMap("body", "ok"));
+                    yield ResponseEntity.status(200).body(Collections.singletonMap("result", "ok"));
                 }
                 case "connectivity" -> {
                          this.daloopRestService.registerConnectivityEvent(hookTemplate);
-                        yield ResponseEntity.status(200).body(Collections.singletonMap("body", "ok"));
+                        yield ResponseEntity.status(200).body(Collections.singletonMap("result", "ok"));
 
                     }
                default -> ResponseEntity.status(400).body(Collections.singletonMap("result", "event unknown"));
