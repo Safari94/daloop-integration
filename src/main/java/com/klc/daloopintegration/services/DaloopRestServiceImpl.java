@@ -31,6 +31,7 @@ public class DaloopRestServiceImpl implements DaloopRestService {
     @Autowired
     private HookRepository hookRepository;
 
+    @Autowired
     private SessionRepository sessionRepository;
 
     private String getToken(){
