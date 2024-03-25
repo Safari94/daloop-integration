@@ -101,7 +101,7 @@ public class DaloopRestServiceImpl implements DaloopRestService {
     public UUID storeStartTransaction(HookData hookTemplate){
 
         SessionInfo si = new SessionInfo();
-        si.setTransactionId(hookTemplate.getData().getChargingStationId());
+        si.setTransactionId(hookTemplate.getData().getUsageId());
         si.setEndTime(null);
         si.setStartTime(LocalDateTime.now());
 
@@ -114,7 +114,7 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
     public void endTransaction(HookData hookTemplate){
 
-        SessionInfo s = this.sessionRepository.findByTransactionIdAndEndTimeIsNull(hookTemplate.getData().getChargingStationId());
+        SessionInfo s = this.sessionRepository.findByTransactionIdAndEndTimeIsNull(hookTemplate.getData().getUsageId());
         if(s!=null){
             s.setEndTime(LocalDateTime.now());
             this.sessionRepository.save(s);
