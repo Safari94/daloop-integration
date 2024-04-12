@@ -3,6 +3,7 @@ package com.klc.daloopintegration.resources;
 
 import com.klc.daloopintegration.data.HookData;
 import com.klc.daloopintegration.dto.ChargingActivityDataDTO;
+import com.klc.daloopintegration.dto.UsageBreakdownDTO;
 import com.klc.daloopintegration.services.DaloopRestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class WebhookController {
                     yield ResponseEntity.status(200).body(Collections.singletonMap("result", "ok"));
                 }
                 case "costCalculated" -> {
-                    String res = this.daloopRestService.getTransactionsDetails(hookTemplate.getData().getUsageId());
+                    UsageBreakdownDTO res = this.daloopRestService.getTransactionsDetails(hookTemplate.getData().getUsageId());
                     log.info(String.valueOf(res));
                     yield ResponseEntity.status(200).body(Collections.singletonMap("result", "ok"));
                 }

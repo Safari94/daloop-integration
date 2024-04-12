@@ -4,6 +4,7 @@ package com.klc.daloopintegration.services;
 import com.klc.daloopintegration.data.HookData;
 import com.klc.daloopintegration.dto.AuthResponseDTO;
 import com.klc.daloopintegration.dto.ChargingActivityDataDTO;
+import com.klc.daloopintegration.dto.UsageBreakdownDTO;
 import com.klc.daloopintegration.entities.Hook;
 import com.klc.daloopintegration.entities.SessionInfo;
 import com.klc.daloopintegration.repository.HookRepository;
@@ -55,7 +56,7 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
     }
 
-    public String getTransactionsDetails(String transactionId){
+    public UsageBreakdownDTO getTransactionsDetails(String transactionId){
 
         RestClient restClient = RestClient.create();
 
@@ -75,12 +76,12 @@ public class DaloopRestServiceImpl implements DaloopRestService {
         return responseMono.block();
         */
 
-        String response = restClient.get()
+        UsageBreakdownDTO response = restClient.get()
                 .uri("https://mobime.io//api/mcp/breakdown/usage/"+transactionId)
                 .header("Authorization","Bearer "+token)
                 .header("BUSINESS_UNIT","KLC")
                 .retrieve()
-                .body(String.class);
+                .body(UsageBreakdownDTO.class);
 
         return response;
     }

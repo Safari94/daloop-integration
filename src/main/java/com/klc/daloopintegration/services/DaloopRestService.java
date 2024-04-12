@@ -2,12 +2,13 @@ package com.klc.daloopintegration.services;
 
 import com.klc.daloopintegration.data.HookData;
 import com.klc.daloopintegration.dto.ChargingActivityDataDTO;
+import com.klc.daloopintegration.dto.UsageBreakdownDTO;
 
 import java.util.UUID;
 
 public interface DaloopRestService {
 
-    String getTransactionsDetails(String transactionId);
+    UsageBreakdownDTO getTransactionsDetails(String transactionId);
 
     void registerConnectivityEvent(HookData hookTemplate);
 
