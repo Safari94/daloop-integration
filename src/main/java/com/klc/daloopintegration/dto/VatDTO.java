@@ -5,12 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
 
+import java.time.LocalDateTime;
+
 @Jacksonized
 @Builder
 @Data
 public class VatDTO {
 
-    private String amountValue;
-    private String dateCreated;
-    private String dateLastUpdate;
+    private Double percentageValue;
+
+    private Double amountValue;
+    private LocalDateTime dateCreated;
+    private LocalDateTime dateLastUpdate;
 }

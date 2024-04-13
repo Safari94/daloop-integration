@@ -5,16 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
 
+import java.time.LocalDateTime;
+
 @Jacksonized
 @Builder
 @Data
 public class DetailDTO {
 
     private String component;
-    private String amountValue;
+    private Double amountValue;
     private String unit;
     private boolean visible;
     private boolean included;
-    private String dateCreated;
-    private String dateLastUpdate;
+    private LocalDateTime dateCreated;
+    private LocalDateTime dateLastUpdate;
 }

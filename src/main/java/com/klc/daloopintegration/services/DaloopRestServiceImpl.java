@@ -7,8 +7,10 @@ import com.klc.daloopintegration.dto.ChargingActivityDataDTO;
 import com.klc.daloopintegration.dto.UsageBreakdownDTO;
 import com.klc.daloopintegration.entities.Hook;
 import com.klc.daloopintegration.entities.SessionInfo;
+import com.klc.daloopintegration.mappers.UsageBreakdownMapper;
 import com.klc.daloopintegration.repository.HookRepository;
 import com.klc.daloopintegration.repository.SessionRepository;
+import com.klc.daloopintegration.repository.UsageBreakdownRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -31,6 +33,12 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
     @Autowired
     private HookRepository hookRepository;
+
+    @Autowired
+    private UsageBreakdownMapper usageBreakdownMapper;
+
+    @Autowired
+    private UsageBreakdownRepository usageBreakdownRepository;
 
     @Autowired
     private SessionRepository sessionRepository;
@@ -82,6 +90,11 @@ public class DaloopRestServiceImpl implements DaloopRestService {
                 .header("BUSINESS_UNIT","KLC")
                 .retrieve()
                 .body(UsageBreakdownDTO.class);
+
+        if(response!=null){
+            log.info("[CREATE] - Insert new usage breakdown info");
+            this.usageBreakdownRepository.save(this.usageBreakdownMapper.dtoToEntity(response));
+        }
 
         return response;
     }

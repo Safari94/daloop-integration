@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
 
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Jacksonized
@@ -14,15 +16,15 @@ public class UsageBreakdownDTO {
     private String businessUnit;
     private String usage;
     private String idFare;
-    private String initDate;
-    private String endDate;
-    private String totalPrice;
-    private String totalDuration;
-    private String voltageLevel;
+    private OffsetDateTime initDate;
+    private OffsetDateTime endDate;
+    private Double totalPrice;
+    private Integer totalDuration;
+    private Double voltageLevel;
     private String region;
     private List<VatDTO> vats;
     private List<DetailDTO> details;
-    private String dateCreated;
-    private String dateLastUpdate;
+    private LocalDateTime dateCreated;
+    private LocalDateTime dateLastUpdate;
     private String id;
 }
