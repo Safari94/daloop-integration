@@ -20,7 +20,7 @@ public class UsageBreakdownDTO {
     private OffsetDateTime endDate;
     private Double totalPrice;
     private Integer totalDuration;
-    private Double voltageLevel;
+    private String voltageLevel;
     private String region;
     private List<VatDTO> vats;
     private List<DetailDTO> details;

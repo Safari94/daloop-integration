@@ -34,7 +34,6 @@ public class DaloopRestServiceImpl implements DaloopRestService {
     @Autowired
     private HookRepository hookRepository;
 
-    @Autowired
     private UsageBreakdownMapper usageBreakdownMapper;
 
     @Autowired

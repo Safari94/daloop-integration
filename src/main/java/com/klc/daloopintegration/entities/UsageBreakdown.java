@@ -1,5 +1,8 @@
 package com.klc.daloopintegration.entities;
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Entity
@@ -20,16 +23,16 @@ public class UsageBreakdown {
     private String idFare;
 
     @Column(name = "init_date")
-    private String initDate;
+    private OffsetDateTime initDate;
 
     @Column(name = "end_date")
-    private String endDate;
+    private OffsetDateTime endDate;
 
     @Column(name = "total_price")
-    private String totalPrice;
+    private Double totalPrice;
 
     @Column(name = "total_duration")
-    private String totalDuration;
+    private Integer totalDuration;
 
     @Column(name = "voltage_level")
     private String voltageLevel;
@@ -44,8 +47,8 @@ public class UsageBreakdown {
     private List<Detail> details;
 
     @Column(name = "date_created")
-    private String dateCreated;
+    private LocalDateTime dateCreated;
 
     @Column(name = "date_last_update")
-    private String dateLastUpdate;
+    private LocalDateTime dateLastUpdate;
 }
