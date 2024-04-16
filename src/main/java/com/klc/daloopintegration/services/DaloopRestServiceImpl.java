@@ -11,6 +11,7 @@ import com.klc.daloopintegration.mappers.UsageBreakdownMapper;
 import com.klc.daloopintegration.repository.HookRepository;
 import com.klc.daloopintegration.repository.SessionRepository;
 import com.klc.daloopintegration.repository.UsageBreakdownRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -31,16 +32,15 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
     private static final String BASE_PATH_AUTH="https://mobime.io";
 
+
     @Autowired
     private HookRepository hookRepository;
 
-    private UsageBreakdownMapper usageBreakdownMapper;
+    @Autowired
+    private  UsageBreakdownRepository usageBreakdownRepository;
 
     @Autowired
-    private UsageBreakdownRepository usageBreakdownRepository;
-
-    @Autowired
-    private SessionRepository sessionRepository;
+    private   SessionRepository sessionRepository;
 
     private String getToken(){
 
@@ -92,7 +92,7 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
         if(response!=null){
             log.info("[CREATE] - Insert new usage breakdown info");
-            this.usageBreakdownRepository.save(this.usageBreakdownMapper.dtoToEntity(response));
+            this.usageBreakdownRepository.save(UsageBreakdownMapper.INSTANCE.dtoToEntity(response));
         }
 
         return response;
