@@ -1,5 +1,6 @@
 package com.klc.daloopintegration.entities;
 import jakarta.persistence.*;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -7,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "usage_breakdown")
+@ToString
 public class UsageBreakdown {
 
     @Id
