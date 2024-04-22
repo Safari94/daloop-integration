@@ -1,14 +1,17 @@
 package com.klc.daloopintegration.entities;
 import jakarta.persistence.*;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "usage_breakdown")
-@ToString
 public class UsageBreakdown {
 
     @Id

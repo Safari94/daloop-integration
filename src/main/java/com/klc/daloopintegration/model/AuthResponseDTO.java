@@ -1,4 +1,4 @@
-package com.klc.daloopintegration.dto;
+package com.klc.daloopintegration.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

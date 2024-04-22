@@ -1,8 +1,7 @@
 package com.klc.daloopintegration.services;
 
 import com.klc.daloopintegration.data.HookData;
-import com.klc.daloopintegration.dto.ChargingActivityDataDTO;
-import com.klc.daloopintegration.dto.UsageBreakdownDTO;
+import com.klc.daloopintegration.model.UsageBreakdownDTO;
 
 import java.util.UUID;
 

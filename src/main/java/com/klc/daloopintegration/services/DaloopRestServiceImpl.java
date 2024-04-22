@@ -2,9 +2,8 @@ package com.klc.daloopintegration.services;
 
 
 import com.klc.daloopintegration.data.HookData;
-import com.klc.daloopintegration.dto.AuthResponseDTO;
-import com.klc.daloopintegration.dto.ChargingActivityDataDTO;
-import com.klc.daloopintegration.dto.UsageBreakdownDTO;
+import com.klc.daloopintegration.model.AuthResponseDTO;
+import com.klc.daloopintegration.model.UsageBreakdownDTO;
 import com.klc.daloopintegration.entities.Hook;
 import com.klc.daloopintegration.entities.SessionInfo;
 import com.klc.daloopintegration.entities.UsageBreakdown;
@@ -12,7 +11,6 @@ import com.klc.daloopintegration.mappers.UsageBreakdownMapper;
 import com.klc.daloopintegration.repository.HookRepository;
 import com.klc.daloopintegration.repository.SessionRepository;
 import com.klc.daloopintegration.repository.UsageBreakdownRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +22,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -40,6 +36,9 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
     @Autowired
     private  UsageBreakdownRepository usageBreakdownRepository;
+
+    @Autowired
+    private UsageBreakdownMapper usageBreakdownMapper;
 
     @Autowired
     private   SessionRepository sessionRepository;
@@ -94,8 +93,9 @@ public class DaloopRestServiceImpl implements DaloopRestService {
 
         if(response!=null){
             log.info("[CREATE] - Insert new usage breakdown info");
-            ModelMapper mapper = new ModelMapper();
-            UsageBreakdown usageBreakdown = mapper.map(response, UsageBreakdown.class);
+            UsageBreakdown usageBreakdown = usageBreakdownMapper.toEntity(response) ;
+
+            //UsageBreakdown usageBreakdown = mapper.map(response, UsageBreakdown.class);
             log.info(usageBreakdown.toString());
             this.usageBreakdownRepository.save(usageBreakdown);
         }

@@ -1,4 +1,4 @@
-package com.klc.daloopintegration.dto;
+package com.klc.daloopintegration.model;
 
 import lombok.Builder;
 import lombok.Data;
@@ -26,5 +26,5 @@ public class UsageBreakdownDTO {
     private List<DetailDTO> details;
     private LocalDateTime dateCreated;
     private LocalDateTime dateLastUpdate;
-    private String id;
+
 }

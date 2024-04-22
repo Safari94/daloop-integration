@@ -2,8 +2,7 @@ package com.klc.daloopintegration.resources;
 
 
 import com.klc.daloopintegration.data.HookData;
-import com.klc.daloopintegration.dto.ChargingActivityDataDTO;
-import com.klc.daloopintegration.dto.UsageBreakdownDTO;
+import com.klc.daloopintegration.model.UsageBreakdownDTO;
 import com.klc.daloopintegration.services.DaloopRestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.UUID;
 
