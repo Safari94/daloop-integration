@@ -4,6 +4,7 @@ package com.klc.daloopintegration.resources;
 import com.klc.daloopintegration.data.HookData;
 import com.klc.daloopintegration.model.UsageBreakdownDTO;
 import com.klc.daloopintegration.services.DaloopRestService;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.Collections;
 import java.util.UUID;
 
 @RestController
+@Hidden
 @Slf4j
 public class WebhookController {
 
