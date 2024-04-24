@@ -5,6 +5,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -45,11 +46,13 @@ public class UsageBreakdown {
     @Column(name = "region")
     private String region;
 
-    @OneToMany(mappedBy = "usageBreakdown", cascade = CascadeType.ALL)
-    private List<Vat> vats;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "usage_breakdown_id")
+    private Set<Vat> vats;
 
-    @OneToMany(mappedBy = "usageBreakdown", cascade = CascadeType.ALL)
-    private List<Detail> details;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "usage_breakdown_id")
+    private Set<Detail> details;
 
     @Column(name = "date_created")
     private LocalDateTime dateCreated;

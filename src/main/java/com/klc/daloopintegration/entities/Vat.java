@@ -19,9 +19,7 @@ public class Vat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "usage_breakdown_id")
-    private UsageBreakdown usageBreakdown;
+
 
     @Column(name = "percentage_value")
     private Double percentageValue;
@@ -34,4 +32,8 @@ public class Vat {
 
     @Column(name = "date_last_update")
     private LocalDateTime dateLastUpdate;
+
+    @ManyToOne
+    @JoinColumn(name = "usage_breakdown_id")
+    private UsageBreakdown usageBreakdown;
 }

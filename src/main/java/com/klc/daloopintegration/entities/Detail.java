@@ -19,9 +19,7 @@ public class Detail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "usage_breakdown_id")
-    private UsageBreakdown usageBreakdown;
+
 
     @Column(name = "component")
     private String component;
@@ -43,5 +41,9 @@ public class Detail {
 
     @Column(name = "date_last_update")
     private LocalDateTime dateLastUpdate;
+
+    @ManyToOne
+    @JoinColumn(name = "usage_breakdown_id")
+    private UsageBreakdown usageBreakdown;
 
 }

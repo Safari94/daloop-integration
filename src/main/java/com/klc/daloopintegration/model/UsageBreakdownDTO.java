@@ -7,6 +7,7 @@ import lombok.extern.jackson.Jacksonized;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Jacksonized
 @Builder
@@ -22,8 +23,8 @@ public class UsageBreakdownDTO {
     private Integer totalDuration;
     private String voltageLevel;
     private String region;
-    private List<VatDTO> vats;
-    private List<DetailDTO> details;
+    private Set<VatDTO> vats;
+    private Set<DetailDTO> details;
     private LocalDateTime dateCreated;
     private LocalDateTime dateLastUpdate;
 
