@@ -8,5 +8,7 @@ public interface ConnectivityService {
 
     List<ConnectivityDTO> getAllByStationId(String stationId);
 
+    public void validateStationsIssues();
+
 
 }
