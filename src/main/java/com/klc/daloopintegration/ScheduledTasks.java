@@ -18,7 +18,9 @@ public class ScheduledTasks {
 
 
     //Job runs every day at 2AM
-    @Scheduled(cron = "0 0 2 * * ?")
+    //@Scheduled(cron = "0 0 2 * * ?")
+    @Scheduled(fixedRate = 5000)
+
     public void performTask() {
         logger.info("Starts job ");
 

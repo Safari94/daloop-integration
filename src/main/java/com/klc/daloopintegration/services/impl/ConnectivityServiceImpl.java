@@ -14,10 +14,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -85,7 +82,9 @@ public class ConnectivityServiceImpl implements ConnectivityService {
             if(result.containsKey(k.getStationInfo())){
                 result.get(k.getStationInfo()).add(connectivityMapper.toDTO(k));
             }else{
-                result.put(k.getStationInfo(), Collections.singletonList(connectivityMapper.toDTO(k)));
+                List<ConnectivityDTO> cc = new ArrayList<>();
+                cc.add(connectivityMapper.toDTO(k));
+                result.put(k.getStationInfo(),cc);
             }
         }
 
