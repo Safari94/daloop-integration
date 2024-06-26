@@ -28,7 +28,7 @@ public class UsageServiceImpl implements UsageService {
     public List<UsageBreakdownDTO> getAllUsageBreakdownByUsage(String usage) {
         return this.usageBreakdownRepository.findByUsageContaining(usage).stream().map(usageBreakdownMapper::toDTO).toList();
     }
-
+    @Override
     public void inspectTransactionWithLessThan3MinOrMore12Hours(){
         LocalDate yesterday = LocalDate.now().minusDays(1);
         LocalDateTime startOfDay = yesterday.atStartOfDay();

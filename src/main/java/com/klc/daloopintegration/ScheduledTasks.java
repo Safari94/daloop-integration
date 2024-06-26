@@ -1,6 +1,7 @@
 package com.klc.daloopintegration;
 
 import com.klc.daloopintegration.services.ConnectivityService;
+import com.klc.daloopintegration.services.UsageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class ScheduledTasks {
     @Autowired
     private ConnectivityService connectivityService;
 
+    @Autowired
+    private UsageService usageService;
+
 
 
     //Job runs every day at 2AM
@@ -25,6 +29,7 @@ public class ScheduledTasks {
         logger.info("Starts job ");
 
         this.connectivityService.validateStationsIssues();
+        this.usageService.inspectTransactionWithLessThan3MinOrMore12Hours();
 
         logger.info("Ends job");
 
