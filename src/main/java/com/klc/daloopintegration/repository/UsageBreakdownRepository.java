@@ -13,7 +13,7 @@ public interface UsageBreakdownRepository extends JpaRepository<UsageBreakdown,L
 
     List<UsageBreakdown> findByUsageContaining(String usage);
 
-    @Query("SELECT h FROM UsageBreakDown h WHERE h.createdDate BETWEEN :startOfDay AND :endOfDay ORDER BY h.createdDate")
+    @Query("SELECT h FROM UsageBreakdown h WHERE h.dateCreated BETWEEN :startOfDay AND :endOfDay ORDER BY h.dateCreated")
     List<UsageBreakdown> findAllRecordsForPreviousDay(@Param("startOfDay") LocalDateTime startOfDay, @Param("endOfDay") LocalDateTime endOfDay);
 
 }
