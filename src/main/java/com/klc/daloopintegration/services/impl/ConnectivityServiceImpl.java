@@ -6,10 +6,12 @@ import com.klc.daloopintegration.mappers.ConnectivityMapper;
 import com.klc.daloopintegration.model.ConnectivityDTO;
 import com.klc.daloopintegration.repository.HookRepository;
 import com.klc.daloopintegration.services.ConnectivityService;
+import com.klc.daloopintegration.services.InfraspeakService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,6 +27,9 @@ public class ConnectivityServiceImpl implements ConnectivityService {
 
     @Autowired
     private ConnectivityMapper connectivityMapper;
+
+    @Autowired
+    private InfraspeakService infraspeakService;
 
 
     @Override
@@ -127,7 +132,7 @@ public class ConnectivityServiceImpl implements ConnectivityService {
     }
 
 
-    private void inspectAllStationsWithMoreThan6Offline(HashMap<String, List<ConnectivityDTO>> result){
+    private void inspectAllStationsWithMoreThan6Offline(HashMap<String, List<ConnectivityDTO>> result)  {
 
         for (Map.Entry<String, List<ConnectivityDTO>> entry : result.entrySet()) {
 
@@ -141,6 +146,12 @@ public class ConnectivityServiceImpl implements ConnectivityService {
                 }
                 if(countOffline>5){
                     log.info("Station {} sent to much offline register in one day", entry.getKey());
+                    try {
+                        infraspeakService.sendTicketInfraspeak(entry.getKey());
+                    }catch (Exception ex){
+                        log.error(ex.toString());
+                    }
+
                     break;
                 }
             }

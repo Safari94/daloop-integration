@@ -4,6 +4,7 @@ import com.klc.daloopintegration.exception.ErrorHandling;
 import com.klc.daloopintegration.model.ConnectivityDTO;
 import com.klc.daloopintegration.model.UsageBreakdownDTO;
 import com.klc.daloopintegration.services.ConnectivityService;
+import com.klc.daloopintegration.services.InfraspeakService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,12 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @CrossOrigin
 public class ConnectivityController {
 
     @Autowired
     private ConnectivityService connectivityService;
+
+    @Autowired
+    private InfraspeakService infraspeakService;
 
     @Operation(summary = "Get all connectivities records by station id ", description = "station must exists")
     @ApiResponses(value = {
@@ -33,5 +39,14 @@ public class ConnectivityController {
     public ResponseEntity<?> getAllUsageBreakdownByUsage(@PathVariable("station_id") String stationId){
 
         return ResponseEntity.status(200).body(this.connectivityService.getAllByStationId(stationId));
+    }
+
+
+    @GetMapping("/api/test")
+    public ResponseEntity<?> getLocationId(@RequestParam("station_id") String stationId) throws IOException, InterruptedException {
+
+        String locationId= this.infraspeakService.sendTicketInfraspeak(stationId);
+
+        return ResponseEntity.status(200).body(locationId);
     }
 }
