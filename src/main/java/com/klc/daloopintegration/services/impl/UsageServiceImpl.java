@@ -4,7 +4,10 @@ import com.klc.daloopintegration.entities.UsageBreakdown;
 import com.klc.daloopintegration.mappers.UsageBreakdownMapper;
 import com.klc.daloopintegration.model.UsageBreakdownDTO;
 import com.klc.daloopintegration.repository.UsageBreakdownRepository;
+import com.klc.daloopintegration.services.InfraspeakService;
 import com.klc.daloopintegration.services.UsageService;
+import com.klc.daloopintegration.utils.ProblemsDescription;
+import com.klc.daloopintegration.utils.ProblemsIds;
 import com.klc.daloopintegration.utils.StringManipulation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,8 @@ public class UsageServiceImpl implements UsageService {
     private UsageBreakdownRepository usageBreakdownRepository;
    @Autowired
     private UsageBreakdownMapper usageBreakdownMapper;
+   @Autowired
+   private InfraspeakService infraspeakService;
 
     @Override
     public List<UsageBreakdownDTO> getAllUsageBreakdownByUsage(String usage) {
@@ -39,6 +44,11 @@ public class UsageServiceImpl implements UsageService {
         for(UsageBreakdown u:usageBreakdownList){
             if(u.getTotalDuration()<=120 || u.getTotalDuration()>=43200 ){
                 String stationName = StringManipulation.removeLastNumberAfterHyphen(u.getUsage());
+                try{this.infraspeakService.sendTicketInfraspeak(stationName, ProblemsDescription.TWO_MIN_SESSION, ProblemsIds.TWO_MIN_SESSION_ID);}
+                catch (Exception ex){
+                    log.error(ex.toString());
+                }
+
                 log.info("Station {} has a session {} with total duration {}",stationName, u.getId(),u.getTotalDuration());
             }
         }

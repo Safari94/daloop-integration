@@ -21,14 +21,14 @@ import java.util.HashMap;
 public class InfraspeakServiceImpl implements InfraspeakService {
 
     @Override
-    public String sendTicketInfraspeak(String stationId) throws IOException, InterruptedException {
+    public String sendTicketInfraspeak(String stationId,String description,Integer problemId) throws IOException, InterruptedException {
 
         String locationId=getLocationId(stationId);
         if(!locationId.equals("null")){
             String childId=getChildId(locationId);
 
             log.info(childId);
-            postToInfraspeak(childId);
+            postToInfraspeak(childId,description, problemId);
         }
 
         return locationId;
@@ -81,9 +81,9 @@ public class InfraspeakServiceImpl implements InfraspeakService {
     }
 
 
-    private void postToInfraspeak(String childId){
+    private void postToInfraspeak(String childId, String description, Integer problemId){
 
-        TicketBody ticketBody = new TicketBody(234735,"Estação enviou demasiados offlines",4,192021,Integer.parseInt(childId),0,"contact",0,0,true);
+        TicketBody ticketBody = new TicketBody(problemId,description,4,192021,Integer.parseInt(childId),0,"contact",0,0,true);
 
         RestClient restClient = RestClient.create();
         ResponseEntity<Void> response = restClient.post()

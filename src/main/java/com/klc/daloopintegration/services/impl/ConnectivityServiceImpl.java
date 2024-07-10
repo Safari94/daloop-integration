@@ -7,6 +7,8 @@ import com.klc.daloopintegration.model.ConnectivityDTO;
 import com.klc.daloopintegration.repository.HookRepository;
 import com.klc.daloopintegration.services.ConnectivityService;
 import com.klc.daloopintegration.services.InfraspeakService;
+import com.klc.daloopintegration.utils.ProblemsDescription;
+import com.klc.daloopintegration.utils.ProblemsIds;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -147,7 +149,7 @@ public class ConnectivityServiceImpl implements ConnectivityService {
                 if(countOffline>5){
                     log.info("Station {} sent to much offline register in one day", entry.getKey());
                     try {
-                        infraspeakService.sendTicketInfraspeak(entry.getKey());
+                        infraspeakService.sendTicketInfraspeak(entry.getKey(), ProblemsDescription.MANY_OFFLINES, ProblemsIds.MANY_OFFLINES_ID);
                     }catch (Exception ex){
                         log.error(ex.toString());
                     }
