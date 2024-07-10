@@ -42,11 +42,5 @@ public class ConnectivityController {
     }
 
 
-    @GetMapping("/api/test")
-    public ResponseEntity<?> getLocationId(@RequestParam("station_id") String stationId) throws IOException, InterruptedException {
 
-        String locationId= this.infraspeakService.sendTicketInfraspeak(stationId);
-
-        return ResponseEntity.status(200).body(locationId);
-    }
 }
