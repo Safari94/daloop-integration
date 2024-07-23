@@ -146,7 +146,7 @@ public class ConnectivityServiceImpl implements ConnectivityService {
                 if(c.getConnectivity().equals("offline")){
                     countOffline+=1;
                 }
-                if(countOffline>5){
+                if(countOffline>8){
                     log.info("Station {} sent to much offline register in one day", entry.getKey());
                     try {
                         infraspeakService.sendTicketInfraspeak(entry.getKey(), ProblemsDescription.MANY_OFFLINES, ProblemsIds.MANY_OFFLINES_ID);
