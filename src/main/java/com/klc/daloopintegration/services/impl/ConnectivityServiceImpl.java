@@ -149,7 +149,7 @@ public class ConnectivityServiceImpl implements ConnectivityService {
                 if(countOffline>8){
                     log.info("Station {} sent to much offline register in one day", entry.getKey());
                     try {
-                        infraspeakService.sendTicketInfraspeak(entry.getKey(), ProblemsDescription.MANY_OFFLINES, ProblemsIds.MANY_OFFLINES_ID);
+                        infraspeakService.postToMaintenanceService(entry.getKey(), ProblemsIds.MANY_OFFLINES_ID);
                     }catch (Exception ex){
                         log.error(ex.toString());
                     }
