@@ -1,6 +1,7 @@
 package com.klc.daloopintegration.data;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @AllArgsConstructor
@@ -11,7 +12,8 @@ import lombok.*;
 public class TicketBody {
 
     private int problemId;
-    private String stationId;
+    @JsonProperty("stationCode")
+    private String stationCode;
 
 
 }
