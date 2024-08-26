@@ -16,4 +16,21 @@ public class StringManipulation {
         }
         return input;
     }
+
+
+    public static String getStationWithoutConnect(String input){
+
+        Pattern pattern = Pattern.compile("-[^-]*$");
+        Matcher matcher = pattern.matcher(input);
+
+        // Replace the matched part with an empty string
+        if (matcher.find()) {
+            return matcher.replaceAll("");
+        }
+        return input;
+
+    }
+
+
+
 }
