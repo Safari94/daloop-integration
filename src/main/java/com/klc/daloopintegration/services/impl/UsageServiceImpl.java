@@ -44,7 +44,19 @@ public class UsageServiceImpl implements UsageService {
         for(UsageBreakdown u:usageBreakdownList){
             if(u.getTotalDuration()<=120 || u.getTotalDuration()>=43200 ){
                 String stationName = StringManipulation.removeLastNumberAfterHyphen(u.getUsage());
-                try{this.infraspeakService.postToMaintenanceService(StringManipulation.getStationWithoutConnect(stationName),  ProblemsIds.TWO_MIN_SESSION_ID);}
+                try{
+                    this.infraspeakService.postToMaintenanceService(StringManipulation.getStationWithoutConnect(stationName),  ProblemsIds.TWO_MIN_SESSION_ID);}
+                catch (Exception ex){
+                    log.error(ex.toString());
+                }
+
+                log.info("Station {} has a session {} with total duration {}",stationName, u.getId(),u.getTotalDuration());
+            }
+
+            if(u.getTotalDuration()>=43200 ){
+                String stationName = StringManipulation.removeLastNumberAfterHyphen(u.getUsage());
+                try{
+                    this.infraspeakService.postToMaintenanceService(StringManipulation.getStationWithoutConnect(stationName),  ProblemsIds.TWELVE_HR_SESSION_ID);}
                 catch (Exception ex){
                     log.error(ex.toString());
                 }
