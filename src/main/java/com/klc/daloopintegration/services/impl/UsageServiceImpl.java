@@ -42,7 +42,7 @@ public class UsageServiceImpl implements UsageService {
         List<UsageBreakdown> usageBreakdownList = this.usageBreakdownRepository.findAllRecordsForPreviousDay(startOfDay,endOfDay);
 
         for(UsageBreakdown u:usageBreakdownList){
-            if(u.getTotalDuration()<=120 || u.getTotalDuration()>=43200 ){
+            if(u.getTotalDuration()<=120){
                 String stationName = StringManipulation.removeLastNumberAfterHyphen(u.getUsage());
                 try{
                     this.infraspeakService.postToMaintenanceService(StringManipulation.getStationWithoutConnect(stationName),  ProblemsIds.TWO_MIN_SESSION_ID);}
