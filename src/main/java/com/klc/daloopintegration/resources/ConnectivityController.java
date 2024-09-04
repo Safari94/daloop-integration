@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Collections;
 
 @RestController
 @CrossOrigin
@@ -38,8 +40,18 @@ public class ConnectivityController {
     @GetMapping("/api/v1/connectivity/{station_id}/get_all")
     public ResponseEntity<?> getAllUsageBreakdownByUsage(@PathVariable("station_id") String stationId){
 
-        return ResponseEntity.status(200).body(this.connectivityService.getAllByStationId(stationId));
+        try {
+            return ResponseEntity.status(200).body(this.connectivityService.getAllByStationId(stationId));
+        }
+        catch (Exception ex){
+
+            return ResponseEntity.status(500).body(Collections.singletonMap("error_message",ex.toString()));
+        }
+
     }
+
+
+
 
 
 

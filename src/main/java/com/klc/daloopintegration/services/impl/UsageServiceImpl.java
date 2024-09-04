@@ -65,6 +65,12 @@ public class UsageServiceImpl implements UsageService {
             }
         }
     }
+
+    @Override
+    public List<UsageBreakdownDTO> getAllUsageOfaStationBetweenDates(String usage, LocalDateTime startDate, LocalDateTime endDate) {
+
+        return this.usageBreakdownRepository.findUsagesRecordByStationBetweenDates(usage,startDate,endDate).stream().map(usageBreakdownMapper::toDTO).toList();
+    }
 }
 
 
