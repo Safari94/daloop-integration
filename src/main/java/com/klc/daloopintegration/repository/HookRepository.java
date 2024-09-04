@@ -18,4 +18,7 @@ public interface HookRepository extends JpaRepository<Hook, UUID> {
 
     @Query("SELECT h FROM Hook h WHERE h.createdDate BETWEEN :startOfDay AND :endOfDay ORDER BY h.createdDate")
     List<Hook> findAllRecordsForPreviousDay(@Param("startOfDay") LocalDateTime startOfDay, @Param("endOfDay") LocalDateTime endOfDay);
+
+    @Query("SELECT h FROM Hook h WHERE h.stationInfo = :stationInfo AND h.createdDate BETWEEN :startOfDay AND :endOfDay ORDER BY h.createdDate")
+    List<Hook> findAllConnectivityPerStationBetweenDates(@Param("stationInfo") String stationInfo,  @Param("startOfDay") LocalDateTime startOfDay, @Param("endOfDay") LocalDateTime endOfDay);
 }

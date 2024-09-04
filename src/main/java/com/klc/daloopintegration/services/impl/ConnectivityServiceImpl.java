@@ -41,6 +41,13 @@ public class ConnectivityServiceImpl implements ConnectivityService {
 
     }
 
+
+    @Override
+    public List<ConnectivityDTO> getAllByStationIdBetweenDates(String stationId, LocalDateTime startDate, LocalDateTime endDate) {
+
+     return this.hookRepository.findAllConnectivityPerStationBetweenDates(stationId,startDate,endDate).stream().map(connectivityMapper::toDTO).toList();
+    }
+
     @Override
     public void validateStationsIssues() {
 
