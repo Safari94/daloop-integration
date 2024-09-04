@@ -64,7 +64,7 @@ public class ConnectivityController {
     public ResponseEntity<?> getByStationIdBetweenDates(@PathVariable("station_id") String stationId, @RequestParam("start_date") LocalDateTime startDate, @RequestParam("end_date") LocalDateTime endDate){
 
         try {
-            return ResponseEntity.status(200).body(this.connectivityService.getAllByStationIdBetweenDates(stationId,startDate,endDatex));
+            return ResponseEntity.status(200).body(this.connectivityService.getAllByStationIdBetweenDates(stationId,startDate,endDate));
         }
         catch (Exception ex){
 
